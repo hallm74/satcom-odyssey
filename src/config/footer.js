@@ -23,15 +23,15 @@ export const footerSocials = [
 
 export const footerLists = [
 	{
-		title: 'Landing Pages',
+		title: 'Support',
 		items: [
 			{
-				title: 'Landing Page 1',
-				slug: '/landing-pages/landing-1',
+				title: 'Remote Support',
+				slug: 'https://sos.splashtop.com',
 			},
 			{
-				title: 'Landing Page 2',
-				slug: '/landing-pages/landing-2',
+				title: 'Remote Support (Alt.)',
+				slug: 'https://satcom.screenconnect.com',
 			},
       // {
 			// 	title: 'Landing Page 3',
