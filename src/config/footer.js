@@ -33,6 +33,14 @@ export const footerLists = [
 				title: 'Remote Support (Alt.)',
 				slug: 'https://satcom.screenconnect.com',
 			},
+			{
+				title: 'Create Ticket by Email',
+				slug: 'mailto:support@1satcom.com',
+			},
+			{
+				title: 'Create Ticket by Phone',
+				slug: 'tel:13182561239',
+			}
       // {
 			// 	title: 'Landing Page 3',
 			// 	slug: '/landing-pages/landing-3',
