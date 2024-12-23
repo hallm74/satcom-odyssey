@@ -1,24 +1,35 @@
 export const footerSocials = [
   {
     name: 'Twitter',
-    url: 'https://twitter.com/jaydanurwin',
+    url: 'https://x.com/1satcom',
     icon: "mdi:twitter",
   },
   {
-    name: 'Youtube',
-    url: 'https://youtube.com/@jaydanurwin',
-    icon: "mdi:youtube",
+    name: 'Facebook',
+    url: 'https://www.facebook.com/1satcom/',
+    icon: "mdi:facebook",
+  },
+  {
+    name: 'Instagram',
+    url: 'https://www.facebook.com/1satcom/',
+    icon: "mdi:instagram",
   },
   {
     name: 'Github',
-    url: 'https://github.com/jaydanurwin',
+    url: 'https://github.com/hallm74ha',
     icon: "mdi:github",
   },
   {
     name: 'Discord',
-    url: 'https://astro.build/chat',
+    url: 'https://discordapp.com/users/351029052817276928',
     icon: "ic:baseline-discord",
   },
+  {
+    name: 'Telegram',
+    url: 'https://t.me/hallm74',
+    icon: "mdi:telegram",
+  },
+  
 ]
 
 export const footerLists = [
