@@ -11,7 +11,7 @@ export const footerSocials = [
   },
   {
     name: 'Instagram',
-    url: 'https://www.facebook.com/1satcom/',
+    url: 'https://www.instagram.com/1satcom/',
     icon: "mdi:instagram",
   },
   {
