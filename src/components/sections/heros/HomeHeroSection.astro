@@ -8,13 +8,9 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 <Container>
 	<section class="hero-section__section">
 		<div class="hero-section__text">
-				<h1>Welcome to SatCom</h1>
+				<h1>Expert IT Solutions</h1>
 				<p>
-					A marketing website theme built with <a
-						href="https://astro.build"
-						target="_blank"
-						rel="noreferrer">Astro</a
-					> and carefully crafted for startups and businesses.
+					Providing small businesses and government agencies with comprehensive IT solutions, including managed services, computer repair, networking, CCTV, and phone systems.
 				</p>
 				<div class="hero-btns__container">
 					<Button href="mailto:support@1satcom.com" customIcon
@@ -22,9 +18,13 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
             <Fragment slot="icon">
               <Icon name="ic:baseline-chevron-right"/>
             </Fragment>
-            </Button
-					>
-					<Button href="/theme/style-guide" unelevated>Style Guide</Button>
+            </Button>
+			<Button href="/company/contact" customIcon
+			>Contact Sales
+			<Fragment slot="icon">
+ 			 <Icon name="ic:baseline-chevron-right"/>
+				</Fragment>
+				</Button>
 				</div>
         {settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}
 		</div>
