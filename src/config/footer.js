@@ -75,7 +75,7 @@ export const footerLists = [
 			},
 		],
 	},
-	{
+/*	{
 		title: 'Theme',
 		items: [
 			{
@@ -95,5 +95,5 @@ export const footerLists = [
         slug: '/theme/customizing-odyssey',
       }
 		],
-	},
+	},*/
 ];
