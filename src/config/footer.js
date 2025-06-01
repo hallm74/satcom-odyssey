@@ -79,6 +79,19 @@ export const footerLists = [
 			},
 		],
 	},
+	{
+		title: 'Legal',
+		items: [
+			{
+				title: 'Terms of Service',
+				slug: '/company/terms-of-service',
+			},
+			{
+				title: 'Privacy Policy',
+				slug: '/company/privacy-policy',
+			},
+		],
+	},
 /*	{
 		title: 'Theme',
 		items: [
