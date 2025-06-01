@@ -1,7 +1,8 @@
 ---
 import ContactForm from '../../components/forms/ContactForm.astro';
 import Layout from '../../layouts/Page.astro';
-import { Container } from '@components/odyssey-theme';
+import { Container, Button } from '@components/odyssey-theme';
+import { Icon } from 'astro-icon/components';
 
 const seo = {
 	title: 'Contact | Astro Odyssey Theme',
@@ -13,21 +14,51 @@ const seo = {
 	<Container>
 		<section class="contact-hero__section">
 			<div class="contact-hero__text-section">
-				<h1>Contact Us</h1>
+				<h1>New Clients</h1>
 				<p>
-					We value your interest in SatCom and are here to assist with your IT needs. Please fill out the form below, and a member of our team will respond promptly.
+					We’re excited to hear from you. Whether you’re looking for IT support, business phones, networking, or security solutions — we’re here to help. Reach out today and let’s discuss how SatCom can support your goals.
 				</p>
 				<div>
 					<p>
-						<em><a href="tel:3182561213">(318)256-1213</a></em> • <em
-							><a href="mailto:sales@1satcom.com">sales@1satcom.com</a
-							></em
-						>
+						<em>Main line: <a href="tel:3182561213">(318)256-1213</a></em></br>
+						<em>Email Sales: <a href="mailto:sales@1satcom.com">sales@1satcom.com</a></em>
 					</p>
+					<p>
+							<Button href="https://satcom.timezest.com/sales" customIcon
+			>Schedule a consultation
+			<Fragment slot="icon">
+ 			 <Icon name="ic:baseline-chevron-right"/>
+				</Fragment>
+				</Button>
+							
+						
+					</p>
+					
 				</div>
 			</div>
-			<div class="col-2__container">
-				<ContactForm />
+		<div class="contact-hero__text-section">
+			<div>
+				<h1>Existing Clients</h1>
+				<p>
+					Already working with us? Reach out to our support team for service requests, troubleshooting, or account questions. We’re ready to help keep your business running smoothly.
+				</p>
+				<p>
+					<em>Main line: <a href="tel:3182561213">(318)256-1213</a></em></br>
+					<em>Voicemail to ticket: <a href="tel:3182561239">(318)256-1239</a></em></br>
+					<em>Support email: <a href="mailto:support@1satcom.com">support@1satcom.com</a></em>
+				</p>
+				<p>
+						<Button href="https://satcom.timezest.com/service-team" customIcon
+		>Schedule a service call
+		<Fragment slot="icon">
+		  <Icon name="ic:baseline-chevron-right"/>
+			</Fragment>
+			</Button>
+						</em
+					>
+				</p>
+				
+			</div>
 			</div>
 		</section>
 	</Container>
