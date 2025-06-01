@@ -1,5 +1,10 @@
 export const footerSocials = [
   {
+	name: 'Linkedin',
+	url: 'https://www.linkedin.com/company/1satcom/',
+	icon: "mdi:linkedin",
+  },
+  {
     name: 'Twitter',
     url: 'https://x.com/1satcom',
     icon: "mdi:twitter",
@@ -16,7 +21,7 @@ export const footerSocials = [
   },
   {
     name: 'Github',
-    url: 'https://github.com/hallm74ha',
+    url: 'https://github.com/hallm74',
     icon: "mdi:github",
   },
   {
