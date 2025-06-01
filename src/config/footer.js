@@ -45,11 +45,11 @@ export const footerLists = [
 				slug: 'https://satcom.screenconnect.com',
 			},
 			{
-				title: 'Create Ticket',
+				title: 'Service Ticket',
 				slug: 'https://satcom.timezest.com/service-team',
 			},
 			{
-				title: 'Create Ticket by Phone',
+				title: 'Service Ticket by Phone',
 				slug: 'tel:13182561239',
 			}
       // {
@@ -62,7 +62,7 @@ export const footerLists = [
 		title: 'Company',
 		items: [
 			{
-				title: 'Contact Sales',
+				title: 'Sales Consultation',
 				slug: 'https://satcom.timezest.com/sales',
 			},
 			{
