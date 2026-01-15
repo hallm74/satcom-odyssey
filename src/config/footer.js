@@ -56,8 +56,12 @@ export const footerLists = [
 			{
 				title: 'Service Ticket by Phone',
 				slug: 'tel:13182561239',
+			},
+			{
+				title: 'Service Chat',
+				slug: 'https://nachat.myconnectwise.net/customer/partnerId/57f277e2040c4a0415635bb3?n=1&q=Help%20Desk',
 			}
-      // {
+	  // {
 			// 	title: 'Landing Page 3',
 			// 	slug: '/landing-pages/landing-3',
 			// },
