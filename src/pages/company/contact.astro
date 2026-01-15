@@ -27,7 +27,7 @@ const seo = {
 							<Button href="https://satcom.timezest.com/sales" customIcon
 			>Schedule a consultation
 			<Fragment slot="icon">
- 			 <Icon name="ic:baseline-chevron-right"/>
+ 			 <Icon name="ic:baseline-request-quote"/>
 				</Fragment>
 				</Button>
 							
@@ -47,16 +47,21 @@ const seo = {
 					<em>Voicemail to ticket: <a href="tel:3182561239">(318)256-1239</a></em></br>
 					<em>Support email: <a href="mailto:support@1satcom.com">support@1satcom.com</a></em>
 				</p>
-				<p>
-						<Button href="https://satcom.timezest.com/service-team" customIcon
+				<div class="button-grid">
+					<Button href="https://satcom.timezest.com/service-team" customIcon
 		>Schedule a service call
 		<Fragment slot="icon">
-		  <Icon name="ic:baseline-chevron-right"/>
+		  <Icon name="ic:baseline-support-agent"/>
 			</Fragment>
 			</Button>
-						</em
-					>
-				</p>
+
+			<Button href="https://satcom.timezest.com/service-team" customIcon
+		>Chat with support
+		<Fragment slot="icon">
+		  <Icon name="ic:baseline-chat"/>
+			</Fragment>
+			</Button>
+				</div>
 				
 			</div>
 			</div>
@@ -84,6 +89,15 @@ const seo = {
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+	}
+	.button-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 1rem;
+		align-items: stretch;
+	}
+	.button-grid :global(.btn) {
+		width: 100%;
 	}
 	@media (max-width: 768px) {
 		.contact-hero__section {

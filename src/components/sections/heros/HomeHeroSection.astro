@@ -14,16 +14,22 @@ import {ThemeSwitcher} from '../../theme-switcher/theme-switcher';
 				</p>
 				<div class="hero-btns__container">
 					<Button href="https://satcom.timezest.com/service-team" customIcon
-						>Service Ticket
-            <Fragment slot="icon">
-              <Icon name="ic:baseline-chevron-right"/>
-            </Fragment>
-            </Button>
+						>Service
+	            <Fragment slot="icon">
+	              <Icon name="ic:baseline-support-agent"/>
+	            </Fragment>
+	            </Button>
 			<Button href="https://satcom.timezest.com/sales" customIcon
-			>Sales Consultation
+			>Sales
 			<Fragment slot="icon">
- 			 <Icon name="ic:baseline-chevron-right"/>
+			 	 <Icon name="ic:baseline-request-quote"/>
 				</Fragment>
+				</Button>
+			<Button href="https://nachat.myconnectwise.net/customer/partnerId/57f277e2040c4a0415635bb3?n=1&q=Help%20Desk" customIcon
+			>Chat
+			<Fragment slot="icon">
+			 	 <Icon name="ic:baseline-chat"/>
+					</Fragment>
 				</Button>
 				</div>
         {settings.enableThemeSwitcher && <ThemeSwitcher client:only/>}
