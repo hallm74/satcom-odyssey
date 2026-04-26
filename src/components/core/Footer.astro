@@ -33,6 +33,22 @@ const { footerSocials, footerLists, copyrightName, background, color, showPlug: 
             ))
           }
         </ul>
+        <a
+          class="footer-bbb__link"
+          href="https://www.bbb.org/us/la/many/profile/computer-repair/satcom-computers-llc-1015-90031917/#sealclick"
+          target="_blank"
+          rel="nofollow noopener noreferrer"
+          aria-label="View Satcom & Computers, LLC BBB Business Review"
+        >
+          <img
+            class="footer-bbb__image"
+            src="https://seal-shreveport.bbb.org/seals/blue-seal-280-80-bbb-90031917.png"
+            alt="Satcom & Computers, LLC BBB Business Review"
+            loading="lazy"
+            width="280"
+            height="80"
+          />
+        </a>
       </div>
       {
         footerLists.map((list) => (
@@ -80,6 +96,17 @@ const { footerSocials, footerLists, copyrightName, background, color, showPlug: 
   }
   .footer-socials__item {
     margin-right: 0.5rem;
+  }
+  .footer-bbb__link {
+    display: inline-block;
+    margin-top: 0.75rem;
+    max-width: 280px;
+  }
+  .footer-bbb__image {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 0;
   }
   .footer-link__list {
     margin: 0;
