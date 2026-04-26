@@ -1,5 +1,5 @@
 ---
-import { Container } from '@components/odyssey-theme';
+import { Container, SmileBackWidget } from '@components/odyssey-theme';
 import Layout from './Page.astro'; 
 import { generateTagData } from '../utils/helpers';
 
@@ -40,6 +40,7 @@ const seo = {
     <article id="article">
         <slot></slot>
     </article>
+    <SmileBackWidget backgroundColor="#f8f9fb" />
   </Container>
 </Layout>
 

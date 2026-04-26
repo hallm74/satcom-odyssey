@@ -1,0 +1,59 @@
+---
+interface Props {
+  appId?: string;
+  backgroundColor?: string;
+  scoreColor?: string;
+  textColor01?: string;
+  scrollType?: string;
+  showAuthor?: boolean;
+  showDate?: boolean;
+  includeCSAT?: boolean;
+  includeNPS?: boolean;
+}
+
+const {
+  appId = 'f0d3d3c0a08847f18863a78ecd9f23ce',
+  backgroundColor = '#ffffff',
+  scoreColor = '#9d3aff',
+  textColor01 = '#00054d',
+  scrollType = 'autoScroll',
+  showAuthor = true,
+  showDate = true,
+  includeCSAT = true,
+  includeNPS = false,
+} = Astro.props as Props;
+
+const settings = {
+  snippetVersion: 'v4.0',
+  backgroundColor,
+  scoreColor,
+  textColor01,
+  widgetType: 'reviewsWidget',
+  widgetStyle: '',
+  border: 'no',
+  dropShadow: 'yes',
+  lang: 'en',
+  showAuthor: String(showAuthor),
+  showCompany: '',
+  showDate: String(showDate),
+  scrollType,
+  includeCSAT: String(includeCSAT),
+  includeNPS: includeNPS ? 'true' : '',
+  app: appId,
+};
+
+const includeCSATParam = includeCSAT ? 'true' : '';
+const includeNPSParam = includeNPS ? 'true' : '';
+const scriptSrc = `https://d2ybfz51gt58l0.cloudfront.net/configuration/widget/script/v4/widget.js?widgetType=reviewsWidget&includeCSAT=${includeCSATParam}&includeNPS=${includeNPSParam}`;
+const inlineScript = `if(typeof sbWidgetSettings === "undefined") var sbWidgetSettings = {};sbWidgetSettings = ${JSON.stringify(settings)};(function(d, s, sid) {var js, ip = d.getElementsByTagName(s)[0];if (d.getElementById(sid)) return;js = d.createElement(s);js.id = sid;js.src = ${JSON.stringify(scriptSrc)};ip.parentNode.insertBefore(js, ip);}(document, "script", "smileback-widget-loader"));`;
+---
+
+<section class="smileback-widget__section" aria-label="Customer feedback">
+  <script id="smileback-widget" is:inline set:html={inlineScript}></script>
+</section>
+
+<style>
+  .smileback-widget__section {
+    margin: var(--section-margin) auto;
+  }
+</style>
