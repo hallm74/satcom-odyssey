@@ -6,6 +6,7 @@ interface Props {
   textColor01?: string;
   scrollType?: string;
   showAuthor?: boolean;
+  showCompany?: boolean;
   showDate?: boolean;
   includeCSAT?: boolean;
   includeNPS?: boolean;
@@ -18,9 +19,10 @@ const {
   textColor01 = '#00054d',
   scrollType = 'autoScroll',
   showAuthor = true,
-  showDate = true,
+  showCompany = true,
+  showDate = false,
   includeCSAT = true,
-  includeNPS = false,
+  includeNPS = true,
 } = Astro.props as Props;
 
 const settings = {
@@ -34,11 +36,11 @@ const settings = {
   dropShadow: 'yes',
   lang: 'en',
   showAuthor: String(showAuthor),
-  showCompany: '',
-  showDate: String(showDate),
+  showCompany: String(showCompany),
+  showDate: showDate ? String(showDate) : '',
   scrollType,
   includeCSAT: String(includeCSAT),
-  includeNPS: includeNPS ? 'true' : '',
+  includeNPS: String(includeNPS),
   app: appId,
 };
 
