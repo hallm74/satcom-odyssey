@@ -13,6 +13,7 @@ interface Props {
 	schedulingLabel: string;
 	qrCodeSrc?: string;
 	qrDownloadSrc?: string;
+	qrDestination?: string;
 }
 
 const {
@@ -25,6 +26,7 @@ const {
 	schedulingLabel,
 	qrCodeSrc,
 	qrDownloadSrc,
+	qrDestination,
 } = Astro.props;
 
 const mainPhone = '(318) 256-1213';
@@ -58,7 +60,7 @@ const seo = {
 					<p class="title">{title}</p>
 				</div>
 
-				<div class:list={['primary-actions', { 'primary-actions--has-qr': qrCodeSrc }]}>
+				<div class="primary-actions">
 					<a class="action action--primary" href={directPhoneHref}>
 						<Icon name="ic:baseline-call" />
 						<span><small>Direct office</small>{directPhone}</span>
@@ -78,14 +80,6 @@ const seo = {
 								<Icon name="ic:baseline-calendar-month" />
 								<span><small>Link placeholder</small>{schedulingLabel}</span>
 							</div>
-						)
-					}
-					{
-						qrCodeSrc && (
-							<button class="action action--qr" id="show-qr" type="button">
-								<Icon name="ic:baseline-qr-code-2" />
-								<span>Show QR code</span>
-							</button>
 						)
 					}
 					<button class="action action--share" id="share-card" type="button">
@@ -111,6 +105,17 @@ const seo = {
 						<span><small>Website</small>1satcom.com</span>
 					</a>
 				</div>
+
+				{
+					qrCodeSrc && (
+						<button class="qr-thumbnail" id="show-qr" type="button" aria-label={`Show ${name}'s QR code`}>
+							<span class="qr-thumbnail__image">
+								<img src={qrCodeSrc} alt="" width="88" height="88" />
+							</span>
+							<span class="qr-thumbnail__label">Show QR</span>
+						</button>
+					)
+				}
 			</section>
 		</article>
 		<p class="page-note">SatCom & Computers, LLC</p>
@@ -127,7 +132,7 @@ const seo = {
 						<div class="qr-image-wrap">
 							<img src={qrCodeSrc} alt={`QR code for ${name}'s SatCom business card`} width="360" height="360" />
 						</div>
-						<p class="qr-url">1satcom.com/hallm</p>
+						<p class="qr-url">{qrDestination}</p>
 						<div class="qr-dialog__actions">
 							{qrDownloadSrc && <a href={qrDownloadSrc} download>Save QR image</a>}
 							<button id="close-qr-secondary" type="button">Back to card</button>
@@ -309,23 +314,13 @@ const seo = {
 	}
 
 	.action--outlined,
-	.action--share,
-	.action--qr {
+	.action--share {
 		background: transparent;
 		color: var(--theme-primary);
 	}
 
 	.action--share {
 		cursor: pointer;
-	}
-
-	.action--qr {
-		background: var(--theme-surface-2);
-		cursor: pointer;
-	}
-
-	.primary-actions--has-qr .action--share {
-		grid-column: 1 / -1;
 	}
 
 	.action--outlined:hover,
@@ -380,6 +375,47 @@ const seo = {
 		letter-spacing: 0.04em;
 		text-align: center;
 		opacity: 0.5;
+	}
+
+	.qr-thumbnail {
+		width: 6.25rem;
+		margin: 1.5rem 0 0 auto;
+		padding: 0.45rem;
+		display: block;
+		border: 0;
+		border-radius: 1rem;
+		background: var(--theme-surface-2);
+		color: var(--theme-on-surface-2);
+		font: inherit;
+		text-align: center;
+		cursor: pointer;
+		transition: transform var(--theme-transition), box-shadow var(--theme-transition);
+	}
+
+	.qr-thumbnail:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 8px 24px rgba(27, 35, 29, 0.1);
+	}
+
+	.qr-thumbnail__image {
+		padding: 0.2rem;
+		display: block;
+		background: #fff;
+		border-radius: 0.65rem;
+	}
+
+	.qr-thumbnail__image img {
+		width: 100%;
+		height: auto;
+	}
+
+	.qr-thumbnail__label {
+		display: block;
+		padding: 0.25rem 0 0.1rem;
+		font-size: 0.55rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 	}
 
 	.qr-dialog {
@@ -517,10 +553,6 @@ const seo = {
 
 		.primary-actions {
 			grid-template-columns: 1fr;
-		}
-
-		.primary-actions--has-qr .action--share {
-			grid-column: auto;
 		}
 
 		.action {
