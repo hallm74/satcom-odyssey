@@ -8,8 +8,11 @@ import BusinessCardPage from '../components/cards/BusinessCardPage.astro';
 	directPhone="(318) 273-2132"
 	directPhoneHref="tel:+13182732132"
 	email="hallm@1satcom.com"
-	schedulingUrl="https://satcom.timezest.com/sales"
 	schedulingLabel="Schedule with Marion"
+	schedulingOptions={[
+		{ label: 'Schedule Sales', url: 'https://satcom.timezest.com/sales' },
+		{ label: 'Schedule Service', url: 'https://satcom.timezest.com/service-team' },
+	]}
 	qrCodeSrc="/assets/qr/marion-hall.svg"
 	qrDownloadSrc="/assets/qr/marion-hall.png"
 	qrDestination="1satcom.com/hallm"

@@ -11,6 +11,10 @@ interface Props {
 	email: string;
 	schedulingUrl?: string;
 	schedulingLabel: string;
+	schedulingOptions?: Array<{
+		label: string;
+		url: string;
+	}>;
 	qrCodeSrc?: string;
 	qrDownloadSrc?: string;
 	qrDestination?: string;
@@ -25,11 +29,14 @@ const {
 	email,
 	schedulingUrl,
 	schedulingLabel,
+	schedulingOptions,
 	qrCodeSrc,
 	qrDownloadSrc,
 	qrDestination,
 	contactUrl,
 } = Astro.props;
+
+const scheduleLinks = schedulingOptions ?? (schedulingUrl ? [{ label: schedulingLabel, url: schedulingUrl }] : []);
 
 const mainPhone = '(318) 256-1213';
 const mainPhoneHref = 'tel:+13182561213';
@@ -69,7 +76,10 @@ const seo = {
 					<p class="title">{title}</p>
 				</div>
 
-				<div class:list={['primary-actions', { 'primary-actions--has-contact': contactUrl }]}>
+				<div class:list={['primary-actions', {
+					'primary-actions--has-contact': contactUrl,
+					'primary-actions--multiple-schedules': scheduleLinks.length > 1,
+				}]}>
 					<a class="action action--primary" href={directPhoneHref}>
 						<Icon name="ic:baseline-call" />
 						<span><small>Direct office</small>{directPhone}</span>
@@ -78,19 +88,19 @@ const seo = {
 						<Icon name="ic:baseline-email" />
 						<span><small>Email</small>{email}</span>
 					</a>
-					{
-						schedulingUrl ? (
-							<a class="action action--schedule" href={schedulingUrl}>
+					{scheduleLinks.length > 0 ? (
+						scheduleLinks.map((schedule) => (
+							<a class="action action--schedule" href={schedule.url}>
 								<Icon name="ic:baseline-calendar-month" />
-								<span>{schedulingLabel}</span>
+								<span>{schedule.label}</span>
 							</a>
-						) : (
-							<div class="action action--placeholder" aria-disabled="true">
-								<Icon name="ic:baseline-calendar-month" />
-								<span><small>Link placeholder</small>{schedulingLabel}</span>
-							</div>
-						)
-					}
+						))
+					) : (
+						<div class="action action--placeholder" aria-disabled="true">
+							<Icon name="ic:baseline-calendar-month" />
+							<span><small>Link placeholder</small>{schedulingLabel}</span>
+						</div>
+					)}
 					{
 						contactUrl && (
 							<a class="action action--contact" href={contactUrl}>
@@ -347,6 +357,10 @@ const seo = {
 
 	.primary-actions--has-contact .action--share {
 		grid-column: 1 / -1;
+	}
+
+	.primary-actions--multiple-schedules .action--share {
+		grid-column: auto;
 	}
 
 	.action--outlined:hover,
