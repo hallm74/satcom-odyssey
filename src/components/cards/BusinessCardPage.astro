@@ -12,6 +12,7 @@ interface Props {
 	schedulingUrl?: string;
 	schedulingLabel: string;
 	schedulingOptions?: Array<{
+		action?: string;
 		label: string;
 		url: string;
 	}>;
@@ -36,7 +37,7 @@ const {
 	contactUrl,
 } = Astro.props;
 
-const scheduleLinks = schedulingOptions ?? (schedulingUrl ? [{ label: schedulingLabel, url: schedulingUrl }] : []);
+const scheduleLinks = schedulingOptions ?? (schedulingUrl ? [{ action: 'schedule', label: schedulingLabel, url: schedulingUrl }] : []);
 
 const mainPhone = '(318) 256-1213';
 const mainPhoneHref = 'tel:+13182561213';
@@ -80,17 +81,17 @@ const seo = {
 					'primary-actions--has-contact': contactUrl,
 					'primary-actions--multiple-schedules': scheduleLinks.length > 1,
 				}]}>
-					<a class="action action--primary" href={directPhoneHref}>
+					<a class="action action--primary" href={directPhoneHref} data-card-action="call_direct">
 						<Icon name="ic:baseline-call" />
 						<span><small>Direct office</small>{directPhone}</span>
 					</a>
-					<a class="action action--outlined" href={`mailto:${email}`}>
+					<a class="action action--outlined" href={`mailto:${email}`} data-card-action="email">
 						<Icon name="ic:baseline-email" />
 						<span><small>Email</small>{email}</span>
 					</a>
 					{scheduleLinks.length > 0 ? (
 						scheduleLinks.map((schedule) => (
-							<a class="action action--schedule" href={schedule.url}>
+							<a class="action action--schedule" href={schedule.url} data-card-action={schedule.action ?? 'schedule'}>
 								<Icon name="ic:baseline-calendar-month" />
 								<span>{schedule.label}</span>
 							</a>
@@ -103,31 +104,32 @@ const seo = {
 					)}
 					{
 						contactUrl && (
-							<a class="action action--contact" href={contactUrl}>
+							<a class="action action--contact" href={contactUrl} data-card-action="download_contact">
 								<Icon name="ic:baseline-person-add-alt-1" />
 								<span>Add to Contacts</span>
 							</a>
 						)
 					}
-					<button class="action action--share" id="share-card" type="button">
+					<button class="action action--share" id="share-card" type="button" data-card-action="share">
 						<Icon name="ic:baseline-ios-share" />
 						<span>Share this page</span>
 					</button>
 				</div>
 
 				<div class="company-details">
-					<a class="detail" href={mainPhoneHref}>
+					<a class="detail" href={mainPhoneHref} data-card-action="call_main_office">
 						<Icon name="ic:baseline-business" />
 						<span><small>Main office</small>{mainPhone}</span>
 					</a>
 					<a
 						class="detail"
 						href="https://maps.apple.com/?q=250+S.+Capitol+St.%2C+Many%2C+LA+71449"
+						data-card-action="open_map"
 					>
 						<Icon name="ic:baseline-location-on" />
 						<span><small>SatCom & Computers</small>{address}</span>
 					</a>
-					<a class="detail" href="https://1satcom.com">
+					<a class="detail" href="https://1satcom.com" data-card-action="visit_website">
 						<Icon name="ic:baseline-language" />
 						<span><small>Website</small>1satcom.com</span>
 					</a>
@@ -135,7 +137,7 @@ const seo = {
 
 				{
 					qrCodeSrc && (
-						<button class="qr-thumbnail" id="show-qr" type="button" aria-label={`Show ${name}'s QR code`}>
+						<button class="qr-thumbnail" id="show-qr" type="button" aria-label={`Show ${name}'s QR code`} data-card-action="show_qr">
 							<span class="qr-thumbnail__image">
 								<img src={qrCodeSrc} alt="" width="88" height="88" />
 							</span>
@@ -161,7 +163,7 @@ const seo = {
 						</div>
 						<p class="qr-url">{qrDestination}</p>
 						<div class="qr-dialog__actions">
-							{qrDownloadSrc && <a href={qrDownloadSrc} download>Save QR image</a>}
+							{qrDownloadSrc && <a href={qrDownloadSrc} download data-card-action="download_qr">Save QR image</a>}
 							<button id="close-qr-secondary" type="button">Back to card</button>
 						</div>
 					</div>
@@ -171,6 +173,24 @@ const seo = {
 	</div>
 
 	<script>
+		const cardName = document.querySelector('h1')?.textContent?.trim() ?? 'Unknown';
+		const captureCardAction = (action: string, linkUrl?: string) => {
+			const gtag = (window as Window & { gtag?: (...args: unknown[]) => void }).gtag;
+			gtag?.('event', action, {
+				card_name: cardName,
+				...(linkUrl ? { link_url: linkUrl } : {}),
+			});
+		};
+
+		document.querySelectorAll<HTMLElement>('[data-card-action]').forEach((element) => {
+			element.addEventListener('click', () => {
+				const action = element.dataset.cardAction;
+				if (!action) return;
+				const linkUrl = element instanceof HTMLAnchorElement ? element.href : undefined;
+				captureCardAction(action, linkUrl);
+			});
+		});
+
 		const shareButton = document.querySelector('#share-card');
 		const qrDialog = document.querySelector<HTMLDialogElement>('#qr-dialog');
 		const showQrButton = document.querySelector('#show-qr');
