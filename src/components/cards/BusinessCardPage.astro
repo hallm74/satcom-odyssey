@@ -116,6 +116,16 @@ const seo = {
 					</button>
 				</div>
 
+				<details class="services" id="card-services">
+					<summary>Click for Services</summary>
+					<ul>
+						<li>IT Services (Computer / Network)</li>
+						<li>Phone</li>
+						<li>Camera Systems</li>
+						<li>Consulting (AI, Automation)</li>
+					</ul>
+				</details>
+
 				<div class="company-details">
 					<a class="detail" href={mainPhoneHref} data-card-action="call_main_office">
 						<Icon name="ic:baseline-business" />
@@ -195,6 +205,11 @@ const seo = {
 		const qrDialog = document.querySelector<HTMLDialogElement>('#qr-dialog');
 		const showQrButton = document.querySelector('#show-qr');
 		const closeQrButtons = document.querySelectorAll('#close-qr, #close-qr-secondary');
+		const services = document.querySelector<HTMLDetailsElement>('#card-services');
+
+		services?.addEventListener('toggle', () => {
+			if (services.open) captureCardAction('view_services');
+		});
 
 		showQrButton?.addEventListener('click', () => qrDialog?.showModal());
 		closeQrButtons.forEach((button) => button.addEventListener('click', () => qrDialog?.close()));
@@ -398,6 +413,51 @@ const seo = {
 
 	.action--placeholder:hover {
 		transform: none;
+	}
+
+	.services {
+		margin-top: 1.25rem;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 1.2rem;
+		background: var(--theme-surface-1);
+		overflow: hidden;
+	}
+
+	.services summary {
+		padding: 0.9rem 1rem;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		font-size: 0.78rem;
+		font-weight: 700;
+		cursor: pointer;
+		list-style: none;
+	}
+
+	.services summary::-webkit-details-marker {
+		display: none;
+	}
+
+	.services summary::after {
+		content: '+';
+		font-size: 1.35rem;
+		font-weight: 400;
+		line-height: 1;
+	}
+
+	.services[open] summary::after {
+		content: '−';
+	}
+
+	.services ul {
+		margin: 0;
+		padding: 0 1rem 1rem 2rem;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.45rem 1.25rem;
+		font-size: 0.68rem;
+		line-height: 1.35;
 	}
 
 	.company-details {
@@ -617,6 +677,10 @@ const seo = {
 
 		.primary-actions--has-contact .action--share {
 			grid-column: auto;
+		}
+
+		.services ul {
+			grid-template-columns: 1fr;
 		}
 
 		.action {
