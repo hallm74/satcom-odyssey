@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Johnson;Sean;;;
+FN:Sean Johnson
+ORG:SatCom & Computers\, LLC
+TITLE:Technician
+item1.TEL:+13182732131
+item1.X-ABLabel:Direct Office
+item2.TEL:+13182561213
+item2.X-ABLabel:Main Office
+EMAIL;TYPE=INTERNET,WORK:sean@1satcom.com
+ADR;TYPE=WORK:;;250 S. Capitol St.;Many;LA;71449;USA
+URL;TYPE=WORK:https://1satcom.com/
+item3.URL:https://satcom.timezest.com/sean
+item3.X-ABLabel:Schedule
+NOTE:Schedule online: https://satcom.timezest.com/sean
+END:VCARD

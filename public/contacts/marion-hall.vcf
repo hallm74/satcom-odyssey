@@ -1,0 +1,17 @@
+BEGIN:VCARD
+VERSION:3.0
+N:Hall;Marion;;;
+FN:Marion Hall
+ORG:SatCom & Computers\, LLC
+TITLE:Owner
+item1.TEL:+13182732132
+item1.X-ABLabel:Direct Office
+item2.TEL:+13182561213
+item2.X-ABLabel:Main Office
+EMAIL;TYPE=INTERNET,WORK:hallm@1satcom.com
+ADR;TYPE=WORK:;;250 S. Capitol St.;Many;LA;71449;USA
+URL;TYPE=WORK:https://1satcom.com/
+item3.URL:https://satcom.timezest.com/sales
+item3.X-ABLabel:Schedule
+NOTE:Schedule online: https://satcom.timezest.com/sales
+END:VCARD
