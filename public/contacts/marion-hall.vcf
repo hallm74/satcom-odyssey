@@ -13,5 +13,5 @@ ADR;TYPE=WORK:;;250 S. Capitol St.;Many;LA;71449;USA
 URL;TYPE=WORK:https://1satcom.com/
 item3.URL:https://satcom.timezest.com/sales
 item3.X-ABLabel:Schedule
-NOTE:Schedule online: https://satcom.timezest.com/sales
+NOTE:Sales scheduling: https://satcom.timezest.com/sales\nSupport scheduling: https://satcom.timezest.com/service-team
 END:VCARD
