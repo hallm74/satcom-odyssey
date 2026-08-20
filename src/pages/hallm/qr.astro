@@ -1,0 +1,97 @@
+---
+import BaseLayout from '../../layouts/Base.astro';
+
+const seo = {
+	title: 'Marion Hall QR Code | SatCom & Computers',
+	description: "Scan to open Marion Hall's SatCom business card.",
+};
+---
+
+<BaseLayout seo={seo}>
+	<div class="qr-page">
+		<section class="qr-card">
+			<p class="eyebrow">Scan to connect</p>
+			<h1>Marion Hall</h1>
+			<p class="title">Owner · SatCom & Computers</p>
+			<div class="qr-wrap">
+				<img
+					src="/assets/qr/marion-hall.svg"
+					alt="QR code for Marion Hall's SatCom business card"
+					width="720"
+					height="720"
+				/>
+			</div>
+			<p class="destination">1satcom.com/hallm</p>
+		</section>
+	</div>
+</BaseLayout>
+
+<style>
+	.qr-page {
+		min-height: 100vh;
+		padding: clamp(1rem, 4vw, 2.5rem);
+		display: grid;
+		place-items: center;
+		background: var(--theme-surface-2);
+	}
+
+	.qr-card {
+		width: min(100%, 720px);
+		padding: clamp(1.5rem, 5vw, 3rem);
+		background: var(--theme-bg);
+		border-radius: var(--theme-shape-radius);
+		box-shadow: 0 24px 70px rgba(27, 35, 29, 0.14);
+		text-align: center;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.25rem;
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		opacity: 0.58;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(2.2rem, 9vw, 4rem);
+		letter-spacing: -0.035em;
+	}
+
+	.title {
+		margin: 0.35rem 0 1.25rem;
+		font-size: clamp(0.95rem, 3vw, 1.2rem);
+		opacity: 0.64;
+	}
+
+	.qr-wrap {
+		width: min(100%, 560px);
+		margin: 0 auto;
+		padding: 0.5rem;
+		background: #fff;
+	}
+
+	.qr-wrap img {
+		width: 100%;
+		height: auto;
+	}
+
+	.destination {
+		margin: 0.8rem 0 0;
+		font-size: 0.75rem;
+		font-weight: 700;
+		letter-spacing: 0.03em;
+	}
+
+	@media (max-width: 600px) {
+		.qr-page {
+			padding: 0.75rem;
+		}
+
+		.qr-card {
+			padding: 1.25rem;
+			border-radius: 1.5rem;
+		}
+	}
+</style>

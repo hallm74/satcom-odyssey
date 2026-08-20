@@ -11,6 +11,8 @@ interface Props {
 	email: string;
 	schedulingUrl?: string;
 	schedulingLabel: string;
+	qrCodeSrc?: string;
+	qrDownloadSrc?: string;
 }
 
 const {
@@ -21,6 +23,8 @@ const {
 	email,
 	schedulingUrl,
 	schedulingLabel,
+	qrCodeSrc,
+	qrDownloadSrc,
 } = Astro.props;
 
 const mainPhone = '(318) 256-1213';
@@ -54,7 +58,7 @@ const seo = {
 					<p class="title">{title}</p>
 				</div>
 
-				<div class="primary-actions">
+				<div class:list={['primary-actions', { 'primary-actions--has-qr': qrCodeSrc }]}>
 					<a class="action action--primary" href={directPhoneHref}>
 						<Icon name="ic:baseline-call" />
 						<span><small>Direct office</small>{directPhone}</span>
@@ -74,6 +78,14 @@ const seo = {
 								<Icon name="ic:baseline-calendar-month" />
 								<span><small>Link placeholder</small>{schedulingLabel}</span>
 							</div>
+						)
+					}
+					{
+						qrCodeSrc && (
+							<button class="action action--qr" id="show-qr" type="button">
+								<Icon name="ic:baseline-qr-code-2" />
+								<span>Show QR code</span>
+							</button>
 						)
 					}
 					<button class="action action--share" id="share-card" type="button">
@@ -102,10 +114,41 @@ const seo = {
 			</section>
 		</article>
 		<p class="page-note">SatCom & Computers, LLC</p>
+
+		{
+			qrCodeSrc && (
+				<dialog class="qr-dialog" id="qr-dialog">
+					<div class="qr-dialog__content">
+						<button class="qr-dialog__close" id="close-qr" type="button" aria-label="Close QR code">
+							<Icon name="ic:baseline-close" />
+						</button>
+						<p class="eyebrow">Scan to connect</p>
+						<h2>{name}</h2>
+						<div class="qr-image-wrap">
+							<img src={qrCodeSrc} alt={`QR code for ${name}'s SatCom business card`} width="360" height="360" />
+						</div>
+						<p class="qr-url">1satcom.com/hallm</p>
+						<div class="qr-dialog__actions">
+							{qrDownloadSrc && <a href={qrDownloadSrc} download>Save QR image</a>}
+							<button id="close-qr-secondary" type="button">Back to card</button>
+						</div>
+					</div>
+				</dialog>
+			)
+		}
 	</div>
 
 	<script>
 		const shareButton = document.querySelector('#share-card');
+		const qrDialog = document.querySelector<HTMLDialogElement>('#qr-dialog');
+		const showQrButton = document.querySelector('#show-qr');
+		const closeQrButtons = document.querySelectorAll('#close-qr, #close-qr-secondary');
+
+		showQrButton?.addEventListener('click', () => qrDialog?.showModal());
+		closeQrButtons.forEach((button) => button.addEventListener('click', () => qrDialog?.close()));
+		qrDialog?.addEventListener('click', (event) => {
+			if (event.target === qrDialog) qrDialog.close();
+		});
 
 		shareButton?.addEventListener('click', async () => {
 			if (navigator.share) {
@@ -266,13 +309,23 @@ const seo = {
 	}
 
 	.action--outlined,
-	.action--share {
+	.action--share,
+	.action--qr {
 		background: transparent;
 		color: var(--theme-primary);
 	}
 
 	.action--share {
 		cursor: pointer;
+	}
+
+	.action--qr {
+		background: var(--theme-surface-2);
+		cursor: pointer;
+	}
+
+	.primary-actions--has-qr .action--share {
+		grid-column: 1 / -1;
 	}
 
 	.action--outlined:hover,
@@ -329,6 +382,93 @@ const seo = {
 		opacity: 0.5;
 	}
 
+	.qr-dialog {
+		width: min(calc(100% - 2rem), 540px);
+		max-height: calc(100vh - 2rem);
+		padding: 0;
+		border: 0;
+		border-radius: 2rem;
+		background: var(--theme-bg);
+		color: var(--theme-on-bg);
+		box-shadow: 0 24px 80px rgba(0, 0, 0, 0.28);
+	}
+
+	.qr-dialog::backdrop {
+		background: rgba(0, 0, 0, 0.66);
+		backdrop-filter: blur(5px);
+	}
+
+	.qr-dialog__content {
+		position: relative;
+		padding: clamp(1.5rem, 5vw, 2.5rem);
+		text-align: center;
+	}
+
+	.qr-dialog__close {
+		width: 2.6rem;
+		height: 2.6rem;
+		padding: 0;
+		display: grid;
+		place-items: center;
+		position: absolute;
+		top: 1rem;
+		right: 1rem;
+		border: 0;
+		border-radius: 50%;
+		background: var(--theme-surface-1);
+		cursor: pointer;
+	}
+
+	.qr-dialog h2 {
+		margin: 0 0 1.25rem;
+		font-size: clamp(2rem, 7vw, 3rem);
+	}
+
+	.qr-image-wrap {
+		width: min(100%, 360px);
+		margin: 0 auto;
+		padding: 0.5rem;
+		background: #fff;
+		border: 1px solid rgba(0, 0, 0, 0.12);
+		border-radius: 1.25rem;
+	}
+
+	.qr-image-wrap img {
+		width: 100%;
+		height: auto;
+	}
+
+	.qr-url {
+		margin: 0.75rem 0 1rem;
+		font-size: 0.76rem;
+		font-weight: 700;
+	}
+
+	.qr-dialog__actions {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.65rem;
+	}
+
+	.qr-dialog__actions a,
+	.qr-dialog__actions button {
+		padding: 0.7rem 0.8rem;
+		border: 2px solid var(--theme-primary);
+		border-radius: var(--theme-button-border-radius);
+		background: var(--theme-primary);
+		color: var(--theme-on-primary);
+		font: inherit;
+		font-size: 0.72rem;
+		font-weight: 700;
+		text-decoration: none;
+		cursor: pointer;
+	}
+
+	.qr-dialog__actions button {
+		background: transparent;
+		color: var(--theme-primary);
+	}
+
 	@media (max-width: 760px) {
 		.card-page {
 			padding: 0;
@@ -379,6 +519,10 @@ const seo = {
 			grid-template-columns: 1fr;
 		}
 
+		.primary-actions--has-qr .action--share {
+			grid-column: auto;
+		}
+
 		.action {
 			min-height: 4.15rem;
 			font-size: 0.9rem;
@@ -386,6 +530,10 @@ const seo = {
 
 		.page-note {
 			display: none;
+		}
+
+		.qr-dialog__actions {
+			grid-template-columns: 1fr;
 		}
 	}
 </style>
