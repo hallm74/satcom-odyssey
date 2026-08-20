@@ -1,0 +1,391 @@
+---
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../../layouts/Base.astro';
+import Logo from '../Logo.astro';
+
+interface Props {
+	name: string;
+	title: string;
+	directPhone: string;
+	directPhoneHref: string;
+	email: string;
+	schedulingUrl?: string;
+	schedulingLabel: string;
+}
+
+const {
+	name,
+	title,
+	directPhone,
+	directPhoneHref,
+	email,
+	schedulingUrl,
+	schedulingLabel,
+} = Astro.props;
+
+const mainPhone = '(318) 256-1213';
+const mainPhoneHref = 'tel:+13182561213';
+const address = '250 S. Capitol St., Many, LA 71449';
+
+const seo = {
+	title: `${name} | SatCom & Computers`,
+	description: `Contact ${name}, ${title} at SatCom & Computers.`,
+};
+---
+
+<BaseLayout seo={seo}>
+	<div class="card-page">
+		<article class="business-card">
+			<section class="brand-panel" aria-label="SatCom & Computers">
+				<a class="logo-link" href="/" aria-label="Visit the SatCom home page">
+					<Logo />
+				</a>
+				<p class="brand-kicker">Technology made personal.</p>
+				<div class="brand-rule" aria-hidden="true"></div>
+				<p class="brand-description">
+					IT, communications, security, and technology solutions for businesses and government.
+				</p>
+			</section>
+
+			<section class="contact-panel">
+				<div class="identity">
+					<p class="eyebrow">SatCom & Computers</p>
+					<h1>{name}</h1>
+					<p class="title">{title}</p>
+				</div>
+
+				<div class="primary-actions">
+					<a class="action action--primary" href={directPhoneHref}>
+						<Icon name="ic:baseline-call" />
+						<span><small>Direct office</small>{directPhone}</span>
+					</a>
+					<a class="action action--outlined" href={`mailto:${email}`}>
+						<Icon name="ic:baseline-email" />
+						<span><small>Email</small>{email}</span>
+					</a>
+					{
+						schedulingUrl ? (
+							<a class="action action--schedule" href={schedulingUrl}>
+								<Icon name="ic:baseline-calendar-month" />
+								<span>{schedulingLabel}</span>
+							</a>
+						) : (
+							<div class="action action--placeholder" aria-disabled="true">
+								<Icon name="ic:baseline-calendar-month" />
+								<span><small>Link placeholder</small>{schedulingLabel}</span>
+							</div>
+						)
+					}
+					<button class="action action--share" id="share-card" type="button">
+						<Icon name="ic:baseline-ios-share" />
+						<span>Share this page</span>
+					</button>
+				</div>
+
+				<div class="company-details">
+					<a class="detail" href={mainPhoneHref}>
+						<Icon name="ic:baseline-business" />
+						<span><small>Main office</small>{mainPhone}</span>
+					</a>
+					<a
+						class="detail"
+						href="https://maps.apple.com/?q=250+S.+Capitol+St.%2C+Many%2C+LA+71449"
+					>
+						<Icon name="ic:baseline-location-on" />
+						<span><small>SatCom & Computers</small>{address}</span>
+					</a>
+					<a class="detail" href="https://1satcom.com">
+						<Icon name="ic:baseline-language" />
+						<span><small>Website</small>1satcom.com</span>
+					</a>
+				</div>
+			</section>
+		</article>
+		<p class="page-note">SatCom & Computers, LLC</p>
+	</div>
+
+	<script>
+		const shareButton = document.querySelector('#share-card');
+
+		shareButton?.addEventListener('click', async () => {
+			if (navigator.share) {
+				await navigator.share({
+					title: document.title,
+					text: `Contact ${document.querySelector('h1')?.textContent} at SatCom & Computers.`,
+					url: window.location.href,
+				});
+				return;
+			}
+
+			await navigator.clipboard.writeText(window.location.href);
+			const label = shareButton.querySelector('span');
+			if (label) label.textContent = 'Link copied';
+		});
+	</script>
+</BaseLayout>
+
+<style>
+	.card-page {
+		min-height: 100vh;
+		padding: clamp(1rem, 5vw, 4rem);
+		display: grid;
+		place-content: center;
+		background:
+			radial-gradient(circle at 12% 18%, rgba(204, 230, 208, 0.9), transparent 27rem),
+			linear-gradient(145deg, #f8f9f8, #eeeeec);
+	}
+
+	.business-card {
+		width: min(100%, 1060px);
+		min-height: 610px;
+		display: grid;
+		grid-template-columns: minmax(280px, 0.8fr) minmax(420px, 1.2fr);
+		background: var(--theme-bg);
+		border: 1px solid rgba(0, 0, 0, 0.08);
+		border-radius: var(--theme-shape-radius);
+		overflow: hidden;
+		box-shadow: 0 24px 70px rgba(27, 35, 29, 0.12);
+	}
+
+	.brand-panel {
+		padding: clamp(2rem, 5vw, 4rem);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		background: var(--theme-surface-2);
+	}
+
+	.logo-link {
+		width: min(100%, 310px);
+		display: block;
+	}
+
+	.logo-link :global(svg) {
+		width: 100%;
+		height: auto;
+		display: block;
+	}
+
+	.brand-kicker {
+		margin: 1.25rem 0 0;
+		font-family: var(--theme-font-family-serif);
+		font-size: var(--font-size-md);
+		font-weight: 700;
+	}
+
+	.brand-rule {
+		width: 3rem;
+		height: 3px;
+		margin: 1.5rem 0;
+		background: var(--theme-primary);
+	}
+
+	.brand-description {
+		max-width: 29rem;
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.6;
+	}
+
+	.contact-panel {
+		padding: clamp(2rem, 5vw, 4.5rem);
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+
+	.eyebrow {
+		margin: 0 0 0.4rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		opacity: 0.58;
+	}
+
+	h1 {
+		margin: 0;
+		font-size: clamp(2.6rem, 6vw, 4.5rem);
+		letter-spacing: -0.035em;
+	}
+
+	.title {
+		margin: 0.45rem 0 2rem;
+		font-size: var(--font-size-md);
+		opacity: 0.68;
+	}
+
+	.primary-actions {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 0.75rem;
+	}
+
+	.action {
+		min-height: 4.35rem;
+		padding: 0.8rem 1rem;
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		border: 2px solid var(--theme-primary);
+		border-radius: 1.2rem;
+		font: inherit;
+		font-size: 0.8rem;
+		font-weight: 700;
+		line-height: 1.25;
+		text-align: left;
+		text-decoration: none;
+		transition: transform var(--theme-transition), background-color var(--theme-transition);
+	}
+
+	.action:hover {
+		transform: translateY(-2px);
+	}
+
+	.action :global(svg) {
+		width: 1.35rem;
+		height: 1.35rem;
+		flex: 0 0 auto;
+	}
+
+	.action small,
+	.detail small {
+		display: block;
+		margin-bottom: 0.14rem;
+		font-size: 0.58rem;
+		font-weight: 700;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+		opacity: 0.62;
+	}
+
+	.action--primary,
+	.action--schedule {
+		background: var(--theme-primary);
+		color: var(--theme-on-primary);
+	}
+
+	.action--outlined,
+	.action--share {
+		background: transparent;
+		color: var(--theme-primary);
+	}
+
+	.action--share {
+		cursor: pointer;
+	}
+
+	.action--outlined:hover,
+	.action--share:hover {
+		background: var(--theme-surface-1);
+	}
+
+	.action--placeholder {
+		border-style: dashed;
+		background: var(--theme-surface-1);
+		color: var(--theme-on-surface-1);
+		cursor: not-allowed;
+		opacity: 0.62;
+	}
+
+	.action--placeholder:hover {
+		transform: none;
+	}
+
+	.company-details {
+		margin-top: 2rem;
+		padding-top: 1.5rem;
+		display: grid;
+		gap: 0.9rem;
+		border-top: 1px solid rgba(0, 0, 0, 0.12);
+	}
+
+	.detail {
+		display: grid;
+		grid-template-columns: 1.35rem 1fr;
+		align-items: center;
+		gap: 0.7rem;
+		font-size: 0.74rem;
+		line-height: 1.35;
+		text-decoration: none;
+	}
+
+	.detail:hover span {
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+	}
+
+	.detail :global(svg) {
+		width: 1.2rem;
+		height: 1.2rem;
+		opacity: 0.58;
+	}
+
+	.page-note {
+		margin: 1.2rem 0 0;
+		font-size: 0.68rem;
+		letter-spacing: 0.04em;
+		text-align: center;
+		opacity: 0.5;
+	}
+
+	@media (max-width: 760px) {
+		.card-page {
+			padding: 0;
+			place-content: stretch;
+		}
+
+		.business-card {
+			min-height: 100vh;
+			grid-template-columns: 1fr;
+			border: 0;
+			border-radius: 0;
+			box-shadow: none;
+		}
+
+		.brand-panel {
+			min-height: 14rem;
+			padding: 2rem;
+		}
+
+		.logo-link {
+			width: min(72%, 260px);
+		}
+
+		.brand-kicker {
+			margin-top: 0.65rem;
+			font-size: 1rem;
+		}
+
+		.brand-rule,
+		.brand-description {
+			display: none;
+		}
+
+		.contact-panel {
+			padding: 2.25rem 1.25rem 2.5rem;
+			justify-content: flex-start;
+		}
+
+		h1 {
+			font-size: clamp(2.55rem, 13vw, 4rem);
+		}
+
+		.title {
+			margin-bottom: 1.5rem;
+		}
+
+		.primary-actions {
+			grid-template-columns: 1fr;
+		}
+
+		.action {
+			min-height: 4.15rem;
+			font-size: 0.9rem;
+		}
+
+		.page-note {
+			display: none;
+		}
+	}
+</style>
