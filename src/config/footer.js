@@ -42,6 +42,10 @@ export const footerLists = [
 		title: 'Support',
 		items: [
 			{
+				title: 'Trusted Support Directory',
+				slug: '/trusted-support',
+			},
+			{
 				title: 'Remote Support',
 				slug: 'https://sos.splashtop.com',
 			},

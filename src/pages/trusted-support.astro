@@ -1,0 +1,231 @@
+---
+import Layout from '../layouts/Page.astro';
+import { Icon } from 'astro-icon/components';
+import { supportCompanies, supportCategories, phoneHref, formatCheckedDate } from '../data/support-directory';
+
+const seo = {
+	title: 'Trusted Support Numbers | SatCom',
+	description: 'Find official U.S. support contacts for Apple, Dell, HP, Intuit, Sage, Optimum, Pelican Broadband, and AT&T. Includes source links and dates checked.',
+};
+---
+
+<Layout seo={seo}>
+	<div class="support-page">
+		<div class="directory-intro">
+			<div>
+				<p class="eyebrow"><Icon name="mdi:shield-check-outline" /> A SatCom client resource · United States</p>
+				<h1>Call the right support team.</h1>
+				<p class="intro-copy">Real companies. Official contact information. A starting point for getting help without guessing which search result to trust.</p>
+			</div>
+			<button type="button" class="print-button" id="print-directory" hidden><Icon name="mdi:printer-outline" /> Print directory</button>
+		</div>
+
+		<aside class="safety-banner" aria-label="Before you call">
+			<Icon name="mdi:shield-alert-outline" />
+			<p><strong>A pop-up says to call support? Stop.</strong> Don’t call the number in the warning or give an unexpected caller remote access. Start with a known contact below. <a href="#stay-safe">More safety tips ↓</a></p>
+		</aside>
+
+		<section aria-labelledby="directory-heading">
+			<div class="directory-heading">
+				<h2 id="directory-heading">Trusted support directory</h2>
+				<span class="region-label">U.S. contacts</span>
+			</div>
+			<div class="directory-controls" id="directory-controls" hidden>
+				<label for="support-search">Find a company or product</label>
+				<div class="search-row">
+					<div class="search-field"><Icon name="mdi:magnify" /><input id="support-search" type="search" placeholder="Try Apple, QuickBooks, printer, or internet" autocomplete="off" aria-controls="support-results" /></div>
+					<button type="button" id="clear-filters">Reset filters</button>
+				</div>
+				<div class="category-filters" role="group" aria-label="Filter by category">
+					{supportCategories.map(category => <button type="button" data-category={category.id} aria-pressed={category.id === 'all'} aria-controls="support-results">{category.label}</button>)}
+				</div>
+			</div>
+			<noscript><p>All contacts are shown below. Use your browser’s Find or Print command to search or save this directory.</p></noscript>
+			<p id="result-count" class="result-count" role="status" aria-live="polite" aria-atomic="true">Showing all {supportCompanies.length} companies</p>
+			<div class="support-grid" id="support-results">
+				{supportCompanies.map(company => (
+					<article class="support-card" id={company.id} data-support-card data-category={company.category} data-search={[company.name, ...company.keywords, ...company.contacts.map(contact => contact.label)].join(' ')} aria-labelledby={`${company.id}-heading`}>
+						<div class="card-heading">
+							<h3 id={`${company.id}-heading`}>{company.name}</h3>
+							<a class="permalink" href={`#${company.id}`} aria-label={`Link to ${company.name}`}><Icon name="mdi:link-variant" /></a>
+						</div>
+						<p class="checked"><Icon name="mdi:check-circle-outline" /> Source checked <time datetime={company.checkedOn}>{formatCheckedDate(company.checkedOn)}</time></p>
+						{company.contacts.map(contact => (
+							<div class="contact-block">
+								<p class="contact-label">{contact.label}</p>
+								<a class="phone-number" href={phoneHref(contact.phone)} aria-label={`Call ${company.name}, ${contact.label}, ${contact.phone}`}><Icon name="mdi:phone-outline" />{contact.phone}</a>
+								<p class="contact-note">{contact.note}</p>
+								<a class="source-link" href={contact.source.url}>{contact.source.label} <Icon name="mdi:arrow-top-right" /><span class="source-domain">{new URL(contact.source.url).hostname}</span></a>
+								</div>
+							))}
+						<p class="guidance">{company.guidance}</p>
+						<a class="support-link" href={company.supportUrl}>{company.supportLabel} <span aria-hidden="true">→</span></a>
+					</article>
+				))}
+			</div>
+			<div class="empty-state" id="empty-state" hidden><h3>No matching companies</h3><p>Try a different company or product, or reset the filters. If you’re unsure who to call, <a href="/company/contact">ask SatCom</a>.</p></div>
+		</section>
+
+		<section class="safety-section" id="stay-safe" aria-labelledby="safety-heading">
+			<div>
+				<p class="eyebrow">A moment to double-check</p>
+				<h2 id="safety-heading">Before you let someone in.</h2>
+				<p>Scammers can imitate a company’s name, website, and caller ID. A familiar logo or a matching incoming number is not proof of identity.</p>
+				<a href="https://consumer.ftc.gov/articles/how-spot-avoid-and-report-tech-support-scams">Read the FTC’s tech-support scam guidance →</a>
+			</div>
+			<ul>
+				<li><strong>Start the contact yourself.</strong> Use an official support page or the number on your bill. Don’t rely on sponsored search results or security pop-ups.</li>
+				<li><strong>Pause before granting access.</strong> Remote-support tools can be legitimate. Only allow a session after you have independently verified who is helping you.</li>
+				<li><strong>Protect your money and sign-in details.</strong> Don’t share passwords or send gift cards, cryptocurrency, or a money transfer to “fix” a computer.</li>
+				<li><strong>Already let someone connect?</strong> End the session, disconnect the device from the internet, and contact your IT provider. If you paid, contact your payment provider using its official app or the number on your card.</li>
+			</ul>
+		</section>
+
+		<aside class="help-strip"><div><h2>Not sure? Ask us first.</h2><p>SatCom can help you find the right place to start.</p></div><a href="/company/contact">Contact SatCom <span aria-hidden="true">→</span></a></aside>
+		<footer class="directory-notes">
+			<p><strong>How this list is checked:</strong> Each number is matched to the company’s own published support information. “Source checked” means the page was reviewed on that date; it does not mean the phone line was test-called. Numbers, hours, coverage, and fees can change. Confirm details on the linked official page before calling.</p>
+			<p>This directory is maintained by SatCom and is not an official directory of the listed companies. Listing a contact does not imply affiliation or free support. <a href="mailto:support@1satcom.com?subject=Trusted%20Support%20directory%20correction">Report a correction or suggest a company</a>.</p>
+			<p class="print-address">Online directory: https://1satcom.com/trusted-support</p>
+		</footer>
+	</div>
+</Layout>
+
+<script>
+	const search = document.querySelector<HTMLInputElement>('#support-search')!;
+	const cards = [...document.querySelectorAll<HTMLElement>('[data-support-card]')];
+	const categories = [...document.querySelectorAll<HTMLButtonElement>('.category-filters button')];
+	const count = document.querySelector('#result-count')!;
+	const empty = document.querySelector<HTMLElement>('#empty-state')!;
+	let selectedCategory = 'all';
+	const normalize = (value: string) => value.toLowerCase().replace(/&/g, 'and').replace(/[^a-z0-9]+/g, ' ').trim();
+
+	function filterCards() {
+		const terms = normalize(search.value).split(' ').filter(Boolean);
+		let visible = 0;
+		for (const card of cards) {
+			const haystack = normalize(card.dataset.search || '');
+			const matches = (selectedCategory === 'all' || selectedCategory === card.dataset.category) && terms.every(term => haystack.includes(term));
+			card.hidden = !matches;
+			if (matches) visible++;
+		}
+		count.textContent = visible === cards.length ? `Showing all ${cards.length} companies` : `Showing ${visible} of ${cards.length} companies`;
+		empty.hidden = visible !== 0;
+		categories.forEach(button => button.setAttribute('aria-pressed', String(button.dataset.category === selectedCategory)));
+	}
+
+	function resetFilters() {
+		search.value = '';
+		selectedCategory = 'all';
+		filterCards();
+	}
+	search.addEventListener('input', filterCards);
+	categories.forEach(button => button.addEventListener('click', () => {
+		selectedCategory = button.dataset.category!;
+		filterCards();
+	}));
+	document.querySelector('#clear-filters')!.addEventListener('click', () => { resetFilters(); search.focus(); });
+	// A shared company anchor must remain reachable even after filtering.
+	window.addEventListener('hashchange', () => {
+		const target = cards.find(card => `#${card.id}` === window.location.hash);
+		if (target?.hidden) { resetFilters(); target.scrollIntoView(); }
+	});
+	document.querySelector<HTMLElement>('#directory-controls')!.hidden = false;
+	const printButton = document.querySelector<HTMLButtonElement>('#print-directory')!;
+	printButton.hidden = false;
+	printButton.addEventListener('click', () => window.print());
+</script>
+
+<style>
+	.support-page { --support-green: #245c42; --support-muted: #515a54; max-width: 1240px; padding: 2.5rem 1.5rem 1rem; margin: 0 auto; }
+	.support-page [hidden] { display: none !important; }
+	.support-page :is(a, button, input):focus-visible { outline: 3px solid #28794f; outline-offset: 4px; }
+	.directory-intro { display: flex; align-items: flex-start; justify-content: space-between; gap: 2rem; margin-bottom: 1.6rem; }
+	.eyebrow { color: var(--support-green); font-size: .75rem; letter-spacing: .07em; text-transform: uppercase; font-weight: 700; display: flex; align-items: center; gap: .4rem; }
+	.eyebrow :global(svg) { width: 1.2rem; height: 1.2rem; flex-shrink: 0; }
+	h1 { font-size: clamp(2rem, 4vw, 3rem); line-height: 1.14; max-width: 800px; letter-spacing: -.04em; margin: .7rem 0; }
+	.intro-copy { max-width: 720px; color: var(--support-muted); font-size: .95rem; margin: 0; }
+	button { cursor: pointer; }
+	.print-button { flex-shrink: 0; display: flex; align-items: center; gap: .4rem; margin-top: .2rem; border: 1px solid #cbd2cc; border-radius: .5rem; background: #fff; padding: .6rem .8rem; font-size: .8rem; }
+	.print-button :global(svg) { width: 1rem; height: 1rem; }
+	.safety-banner { display: flex; gap: .7rem; padding: 1rem 1.1rem; border: 1px solid #e6d7ad; border-radius: .6rem; background: #fff9e9; color: #624d19; margin-bottom: 2rem; font-size: .85rem; }
+	.safety-banner > :global(svg) { width: 1.4rem; height: 1.4rem; flex-shrink: 0; }
+	.safety-banner p { margin: 0; }
+	.safety-banner a { white-space: nowrap; }
+	.directory-heading { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+	.directory-heading h2 { font-size: 1.35rem; margin: 0; }
+	.region-label { color: var(--support-muted); font-size: .75rem; white-space: nowrap; }
+	.directory-controls label { font-size: .8rem; font-weight: 700; display: block; margin-bottom: .4rem; }
+	.search-row { display: flex; gap: .6rem; }
+	.search-field { display: flex; align-items: center; border: 1px solid #aeb8b0; border-radius: .5rem; padding: 0 .8rem; flex: 1; min-width: 0; background: #fff; }
+	.search-field :global(svg) { width: 1.3rem; height: 1.3rem; flex-shrink: 0; color: var(--support-muted); }
+	input { border: none; background: transparent; width: 100%; min-width: 0; padding: .8rem .6rem; font-size: .9rem; }
+	#clear-filters { border: 1px solid #cbd2cc; border-radius: .5rem; background: #fff; padding: .5rem .8rem; font-size: .8rem; }
+	.category-filters { display: flex; gap: .5rem; flex-wrap: wrap; margin: .9rem 0; }
+	.category-filters button { border: 1px solid #d5dbd6; background: #fff; border-radius: 2rem; padding: .45rem .8rem; font-size: .8rem; }
+	.category-filters button[aria-pressed='true'] { background: var(--support-green); color: #fff; border-color: var(--support-green); }
+	.category-filters button:hover, #clear-filters:hover, .print-button:hover { box-shadow: 0 0 0 1px var(--support-green); }
+	.result-count { font-size: .75rem; color: var(--support-muted); margin: 1rem 0; }
+	.support-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; align-items: start; }
+	.support-card { border: 1px solid #d9dfd9; border-radius: .8rem; padding: 1.4rem; background: #fff; scroll-margin-top: 1rem; }
+	.support-card:target { border-color: var(--support-green); box-shadow: 0 0 0 2px #a9c6b3; }
+	.card-heading { display: flex; align-items: center; justify-content: space-between; gap: .5rem; }
+	.card-heading h3 { font-family: var(--theme-font-family-sans); font-size: 1.5rem; font-weight: 700; margin: 0; }
+	.permalink { padding: .4rem; display: flex; color: #607367; }
+	.permalink :global(svg) { width: 1.1rem; height: 1.1rem; }
+	.checked { display: flex; align-items: center; gap: .3rem; font-size: .7rem; color: var(--support-green); margin: .35rem 0 1rem; flex-wrap: wrap; }
+	.checked :global(svg) { width: .9rem; height: .9rem; }
+	.contact-block { border-top: 1px solid #e4e8e3; padding-top: .9rem; margin-top: .9rem; }
+	.contact-label { font-size: .8rem; font-weight: 700; margin: 0 0 .35rem; }
+	.phone-number { display: inline-flex; align-items: center; gap: .5rem; color: var(--support-green); font-size: clamp(1.1rem, 2vw, 1.45rem); font-weight: 700; text-decoration: none; white-space: nowrap; font-variant-numeric: tabular-nums; padding: .2rem 0; }
+	.phone-number:hover { text-decoration: underline; }
+	.phone-number :global(svg) { width: 1.1rem; height: 1.1rem; }
+	.contact-note, .guidance { font-size: .8rem; color: var(--support-muted); }
+	.contact-note { margin: .4rem 0 .6rem; }
+	.source-link { font-size: .7rem; text-underline-offset: 3px; overflow-wrap: anywhere; }
+	.source-link :global(svg) { width: .7rem; height: .7rem; display: inline; vertical-align: middle; }
+	.source-domain { display: block; color: var(--support-muted); font-size: .65rem; margin-top: .15rem; }
+	.guidance { background: #f4f6f2; padding: .8rem; border-radius: .4rem; margin: 1rem 0; }
+	.support-link { font-size: .8rem; font-weight: 700; color: var(--support-green); text-underline-offset: 3px; }
+	.empty-state { text-align: center; padding: 3rem 1rem; background: #f4f6f2; border-radius: .6rem; }
+	.empty-state h3 { font-size: 1.3rem; }
+	.empty-state p { font-size: .9rem; margin: 0; }
+	.safety-section { display: grid; grid-template-columns: .9fr 1.1fr; gap: 3rem; border-top: 1px solid #d9dfd9; padding-top: 2.5rem; margin-top: 3rem; scroll-margin-top: 2rem; }
+	.safety-section h2 { font-size: 1.8rem; line-height: 1.2; }
+	.safety-section p, .safety-section li, .safety-section a { font-size: .85rem; }
+	.safety-section ul { padding-left: 1.1rem; margin: 0; }
+	.safety-section li { margin-bottom: 1rem; padding-left: .3rem; }
+	.safety-section a { color: var(--support-green); }
+	.help-strip { background: #eaf1e8; border-radius: .7rem; padding: 1.5rem; margin: 2rem 0 1.5rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; }
+	.help-strip h2 { font-size: 1.2rem; margin-bottom: .4rem; }
+	.help-strip p { font-size: .85rem; margin: 0; }
+	.help-strip a { font-weight: 700; font-size: .85rem; flex-shrink: 0; }
+	.directory-notes { color: var(--support-muted); font-size: .7rem; }
+	.print-address { display: none; }
+	@media (max-width: 760px) {
+		.support-page { padding: 1.5rem 1rem 1rem; }
+		.directory-intro { flex-direction: column; gap: 1rem; }
+		.support-grid, .safety-section { grid-template-columns: 1fr; }
+		.safety-section { gap: 1rem; }
+		.help-strip { align-items: flex-start; flex-direction: column; }
+		.support-card { padding: 1.1rem; }
+		.eyebrow { font-size: .65rem; }
+		.search-row { flex-wrap: wrap; }
+		.search-field { flex-basis: 100%; }
+	}
+	@media print {
+		:global(body) { max-width: none; font-size: 10pt; }
+		:global(body > header), :global(body > footer), :global(.skip-link) { display: none !important; }
+		.support-page { padding: 0; max-width: none; }
+		.directory-intro { display: block; }
+		h1 { font-size: 24pt; }
+		.print-button, .directory-controls, .result-count, .region-label, .permalink, .empty-state, .help-strip { display: none !important; }
+		.support-grid { display: block; }
+		.support-page .support-card[hidden], .support-card { display: block !important; break-inside: avoid; margin: 0 0 12pt; padding: 12pt; }
+		.support-card:target { box-shadow: none; border-color: #d9dfd9; }
+		.card-heading h3 { font-size: 16pt; }
+		.phone-number { font-size: 15pt; }
+		.safety-section { display: block; break-before: page; margin-top: 0; padding-top: 0; }
+		.safety-banner { break-inside: avoid; }
+		.print-address { display: block; }
+	}
+</style>
