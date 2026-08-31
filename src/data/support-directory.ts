@@ -15,6 +15,12 @@ export interface SupportCompany {
 	checkedOn: string;
 	contacts: SupportContact[];
 	guidance: string;
+	remoteAccessWarning?: {
+		title: string;
+		context: string;
+		advice: string;
+		sourceUrl: string;
+	};
 	supportUrl: string;
 	supportLabel: string;
 }
@@ -68,6 +74,12 @@ export const supportCompanies: SupportCompany[] = [
 			source: { label: 'Intuit support and account resources', url: 'https://www.intuit.com/support/' },
 		}],
 		guidance: 'For QuickBooks, TurboTax, or another product, use Intuit’s official product-support links. Sign in to your product to find its contact or callback options.',
+		remoteAccessWarning: {
+			title: 'QuickBooks remote-access safety',
+			context: 'Intuit’s former Glance address, glance.intuit.com, now redirects to Intuit Meeting. Intuit’s current guidance describes Intuit Meeting and in-app screen sharing.',
+			advice: 'If someone claiming to be QuickBooks support asks you to install another remote-access tool, stop and independently verify the request through support inside QuickBooks before downloading anything or granting access. Using Glance or Intuit Meeting alone does not prove a caller is legitimate.',
+			sourceUrl: 'https://quickbooks.intuit.com/learn-support/en-us/help-article/remote-access/use-smartlook-share-screen-support-agents/L9qN7BuTP_US_en_US',
+		},
 		supportUrl: 'https://www.intuit.com/support/', supportLabel: 'Choose your Intuit product',
 	},
 	{

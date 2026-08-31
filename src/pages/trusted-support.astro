@@ -59,6 +59,14 @@ const seo = {
 								</div>
 							))}
 						<p class="guidance">{company.guidance}</p>
+						{company.remoteAccessWarning && (
+							<aside class="remote-access-warning" aria-label={company.remoteAccessWarning.title}>
+								<p><strong>{company.remoteAccessWarning.title}</strong></p>
+								<p>{company.remoteAccessWarning.context}</p>
+								<p>{company.remoteAccessWarning.advice}</p>
+								<a href={company.remoteAccessWarning.sourceUrl}>Read Intuit’s screen-sharing guidance →</a>
+							</aside>
+						)}
 						<a class="support-link" href={company.supportUrl}>{company.supportLabel} <span aria-hidden="true">→</span></a>
 					</article>
 				))}
@@ -185,6 +193,9 @@ const seo = {
 	.source-link :global(svg) { width: .7rem; height: .7rem; display: inline; vertical-align: middle; }
 	.source-domain { display: block; color: var(--support-muted); font-size: .65rem; margin-top: .15rem; }
 	.guidance { background: #f4f6f2; padding: .8rem; border-radius: .4rem; margin: 1rem 0; }
+	.remote-access-warning { background: #fff9e9; border: 1px solid #e6d7ad; border-radius: .4rem; color: #624d19; padding: .9rem; margin-bottom: 1rem; font-size: .8rem; }
+	.remote-access-warning p { margin-bottom: .6rem; }
+	.remote-access-warning a { text-underline-offset: 3px; }
 	.support-link { font-size: .8rem; font-weight: 700; color: var(--support-green); text-underline-offset: 3px; }
 	.empty-state { text-align: center; padding: 3rem 1rem; background: #f4f6f2; border-radius: .6rem; }
 	.empty-state h3 { font-size: 1.3rem; }
