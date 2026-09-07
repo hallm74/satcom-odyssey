@@ -1,0 +1,38 @@
+export const projects = [
+	{
+		name: 'Sabine Community Connection',
+		category: 'Community website',
+		url: 'https://sabinecommunityconnection.com',
+		image: '/assets/images/projects/community.webp',
+		description: 'A welcoming online home for a Sabine Parish nonprofit, connecting families and volunteers with local programs and ways to get involved.',
+		features: ['Program information', 'Community photo gallery', 'Volunteer & contact resources'],
+		accent: '#e9f0df',
+	},
+	{
+		name: 'SOLE to SOUL YOGA',
+		category: 'Booking app',
+		url: 'https://yoga.allthingssabine.com',
+		image: '/assets/images/projects/yoga.webp',
+		description: 'A simple path from finding a yoga class to saving a spot. Students can browse the schedule and see available spaces without creating an account.',
+		features: ['Class schedule', 'Available spaces', 'Booking without an account'],
+		accent: '#f6e6dd',
+	},
+	{
+		name: 'BDC Radio',
+		category: 'Streaming platform',
+		url: 'https://radio.bdcradio.com',
+		image: '/assets/images/projects/radio.webp',
+		description: 'Local radio in one place, with live station streams, now-playing information, news updates, and community polls.',
+		features: ['Live station streams', 'Now-playing information', 'News & community polls'],
+		accent: '#e0eaf7',
+	},
+	{
+		name: 'All Things Sabine Menus',
+		category: 'Local dining app',
+		url: 'https://menus.allthingssabine.com',
+		image: '/assets/images/projects/menus.webp',
+		description: 'A local menu drawer that makes choosing a place to eat easier. Browse restaurant menus, put together a shareable list, and help others discover nearby favorites.',
+		features: ['Restaurant menus', 'Shareable lists', 'Community menu submissions'],
+		accent: '#f1e4d4',
+	},
+];

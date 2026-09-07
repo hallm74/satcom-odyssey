@@ -1,0 +1,41 @@
+---
+import { projects } from '../../config/projects';
+interface Props { detailed?: boolean; }
+const { detailed = false } = Astro.props;
+---
+
+<div class="project-grid">
+	{projects.map((project) => (
+		<article class="project-card">
+			<div class="project-preview" style={`--project-accent: ${project.accent}`}>
+				<img src={project.image} alt={`${project.name} website preview`} width="1200" height="675" loading="lazy" />
+			</div>
+			<div class="project-content">
+				<p class="project-category">{project.category}</p>
+				<h3>{project.name}</h3>
+				<p class="project-description">{project.description}</p>
+				{detailed && <ul>{project.features.map((feature) => <li>{feature}</li>)}</ul>}
+				<a href={project.url} target="_blank" rel="noopener noreferrer" aria-label={`Visit ${project.name} (opens in a new tab)`}>
+					Visit project <span aria-hidden="true">↗</span>
+				</a>
+			</div>
+		</article>
+	))}
+</div>
+
+<style>
+	.project-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.5rem; }
+	.project-card { display: flex; flex-direction: column; border: 1px solid #dfe3df; border-radius: 1.25rem; overflow: hidden; background: var(--theme-bg); }
+	.project-preview { padding: 1.4rem 1.4rem 0; background: var(--project-accent); overflow: hidden; }
+	.project-preview img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; object-position: top; border-radius: .5rem .5rem 0 0; box-shadow: 0 4px 24px #00000012; }
+	.project-content { display: flex; flex-direction: column; flex: 1; padding: 1.5rem; }
+	.project-category { color: #47624e; font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
+	h3 { font-size: clamp(1.2rem, 1.7vw, 1.55rem); line-height: 1.25; }
+	.project-description, ul { font-size: .88rem; color: #424b45; }
+	ul { padding-left: 1.1rem; margin: 0 0 1.5rem; }
+	li + li { margin-top: .35rem; }
+	a { margin-top: auto; padding-top: .5rem; display: flex; justify-content: space-between; align-items: center; color: var(--theme-on-bg); font-size: .85rem; font-weight: 700; text-underline-offset: .25em; }
+	a:hover { color: #355f41; }
+	a:focus-visible { outline: 2px solid #355f41; outline-offset: 5px; border-radius: 2px; }
+	@media (max-width: 850px) { .project-grid { grid-template-columns: 1fr; } .project-preview { padding: 1.25rem 1.25rem 0; } }
+</style>

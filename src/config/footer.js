@@ -75,6 +75,10 @@ export const footerLists = [
 		title: 'Company',
 		items: [
 			{
+				title: 'Special Projects',
+				slug: '/projects',
+			},
+			{
 				title: 'Sales Consultation',
 				slug: 'https://satcom.timezest.com/sales',
 			},

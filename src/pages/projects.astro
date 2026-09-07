@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Page.astro';
+import { Container, Button } from '@components/odyssey-theme';
+import ProjectShowcase from '../components/sections/ProjectShowcase.astro';
+import GamesSection from '../components/sections/GamesSection.astro';
+
+const seo = {
+	title: 'Special Projects | SatCom',
+	description: 'Explore SatCom’s special projects: community websites, class booking, local radio, restaurant menus, and games. A growing collection of web, app, and AI work.',
+	image: '/assets/images/projects/special-projects-og.jpg',
+	imageAlt: 'SatCom Special Projects — Web / App / AI, featuring Sabine Community Connection, SOLE to SOUL YOGA, and BDC Radio.',
+	imageWidth: 1200,
+	imageHeight: 630,
+};
+---
+
+<Layout {seo}>
+	<Container>
+		<section class="projects-hero" aria-labelledby="projects-title">
+			<p class="eyebrow">Web / App / AI · Built by SatCom</p>
+			<h1 id="projects-title">Special Projects</h1>
+			<p class="intro">Connecting a community. Filling a class. Bringing local radio to more listeners. A look at the websites and applications we’re building for the people who use them.</p>
+			<a class="explore-link" href="#selected-projects">Explore the projects <span aria-hidden="true">↓</span></a>
+		</section>
+		<section id="selected-projects" class="selected-projects" aria-labelledby="selected-title">
+			<div class="section-heading"><h2 id="selected-title">Selected projects</h2><p>Different projects. Everyday possibilities.</p></div>
+			<ProjectShowcase detailed />
+		</section>
+		<section class="next-section" aria-labelledby="next-title">
+			<div>
+				<p class="eyebrow">A growing collection</p>
+				<h2 id="next-title">More ideas taking shape.</h2>
+				<p>This is the start of our Web / App / AI collection. We’ll add new work here as our websites, applications, and AI projects develop.</p>
+			</div>
+			<div class="project-cta"><p>Have something you’d like to build?</p><Button href="https://satcom.timezest.com/sales">Let’s talk about your project</Button></div>
+		</section>
+		<GamesSection />
+	</Container>
+</Layout>
+
+<style>
+	.projects-hero { margin: 2rem 0 4rem; padding: clamp(2rem, 5vw, 4.5rem); border-radius: var(--theme-shape-radius); background: var(--theme-surface-2); }
+	.eyebrow { font-size: .75rem; font-weight: 700; text-transform: uppercase; letter-spacing: .14em; color: #35563e; }
+	h1 { max-width: 1100px; font-size: clamp(2rem, 4.5vw, 3.65rem); letter-spacing: -.045em; line-height: 1.13; margin: 1.25rem 0; }
+	.intro { max-width: 740px; color: #314a37; font-size: 1.05rem; }
+	.explore-link { display: inline-flex; gap: 1.5rem; margin-top: 1rem; color: inherit; font-weight: 700; font-size: .85rem; text-underline-offset: .25em; }
+	.selected-projects { scroll-margin-top: 2rem; }
+	.section-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+	.section-heading h2 { font-size: 1.8rem; }
+	.section-heading p { font-size: .85rem; color: #566259; }
+	.next-section { display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: center; margin: 4rem 0; padding: 2.5rem; border-radius: var(--theme-shape-radius); background: var(--theme-surface-1); }
+	.next-section h2 { font-size: 1.8rem; }
+	.next-section p { max-width: 640px; }
+	.next-section > div > p:last-child { margin-bottom: 0; color: #424b45; font-size: .95rem; }
+	.project-cta { justify-self: end; }
+	.project-cta p { font-weight: 700; }
+	@media (max-width: 850px) { .section-heading { display: block; } .next-section { grid-template-columns: 1fr; gap: 1.5rem; padding: 1.5rem; } .project-cta { justify-self: start; } .projects-hero { margin-top: 1rem; } }
+</style>

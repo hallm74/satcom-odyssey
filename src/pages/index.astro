@@ -3,6 +3,7 @@ import { Container, FeatureCard, ThreeColumnTextSection, StickyTextImageSection,
 
 import Layout from '../layouts/Page.astro';
 import HomeHeroSection from '../components/sections/heros/HomeHeroSection.astro';
+import ProjectShowcase from '../components/sections/ProjectShowcase.astro';
 import { Icon } from 'astro-icon/components';
 ---
 
@@ -35,6 +36,16 @@ import { Icon } from 'astro-icon/components';
 			</div>
 			<!--<Button slot="column-3-cta">Learn More</Button>-->
 		</ThreeColumnTextSection>
+	</Container>
+
+	<Container>
+		<section class="home-projects" aria-labelledby="home-projects-title">
+			<div class="home-projects-heading">
+				<div><h2 id="home-projects-title">Special Projects</h2><p>A look at what we’re building, from community websites to everyday apps.</p></div>
+				<Button href="/projects" outlined>Explore special projects</Button>
+			</div>
+			<ProjectShowcase />
+		</section>
 	</Container>
 
 	<Container>
@@ -87,6 +98,11 @@ import { Icon } from 'astro-icon/components';
 </Layout>
 
 <style>
+	.home-projects { margin: 4rem 0; }
+	.home-projects-heading { display: flex; justify-content: space-between; align-items: center; gap: 2rem; margin-bottom: 1.5rem; }
+	.home-projects-heading h2 { font-size: clamp(1.6rem, 3vw, 2.3rem); }
+	.home-projects-heading p { margin: 0; max-width: 42rem; color: #424b45; }
+	@media (max-width: 850px) { .home-projects-heading { flex-direction: column; align-items: flex-start; gap: 1rem; } }
 	.feature-card__section {
 		margin: var(--section-margin) auto;
 	}
