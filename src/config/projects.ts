@@ -44,4 +44,13 @@ export const projects = [
 		features: ['Live aircraft map', 'Aircraft details & watchlist', 'Receiver activity dashboard'],
 		accent: '#dcebe7',
 	},
+	{
+		name: 'Nourish Ledger',
+		category: 'Nutrition diary app',
+		url: 'https://nourish-ledger.netlify.app/',
+		image: '/assets/images/projects/nourish-ledger.webp',
+		description: 'A personal nutrition diary for logging meals, tracking nutrients, and keeping recipes and goals together. Food search, barcode scanning, and AI-assisted meal-photo drafts help make daily entries easier.',
+		features: ['Meal & nutrient tracking', 'Food search & barcode scanning', 'AI-assisted meal-photo drafts'],
+		accent: '#e7ebe1',
+	},
 ];
