@@ -35,4 +35,13 @@ export const projects = [
 		features: ['Restaurant menus', 'Shareable lists', 'Community menu submissions'],
 		accent: '#f1e4d4',
 	},
+	{
+		name: 'Many Airspace',
+		category: 'Live aircraft dashboard',
+		url: 'https://many-airspace.netlify.app/',
+		image: '/assets/images/projects/many-airspace.webp',
+		description: 'A live look at the skies around Many, Louisiana. Explore an interactive aircraft map, see flight details, and follow notable aircraft using locally received radio data.',
+		features: ['Live aircraft map', 'Aircraft details & watchlist', 'Receiver activity dashboard'],
+		accent: '#dcebe7',
+	},
 ];
