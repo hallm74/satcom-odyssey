@@ -1,5 +1,30 @@
 export const projects = [
 	{
+		name: 'BDC Radio redesign',
+		category: 'Featured project · Website & broadcast platform',
+		url: 'https://bdcradio.com',
+		linkLabel: 'Visit website',
+		image: '/assets/images/projects/bdc-redesign.webp',
+		description: 'A new home for local radio. The bdcradio.com redesign brings eight station profiles, six live streams, shows, sports scores, and community news together, with a player that keeps the music going as listeners explore.',
+		features: ['Persistent radio player', 'Live scores & local news', 'Station & show directories'],
+		accent: '#ece9df',
+		featured: true,
+		details: [
+			{
+				title: 'Behind the broadcast',
+				text: 'A fast Astro website connects to a Django backend for station information, schedules, and sports scores. Staff manage the platform through a central admin, while AzuraCast and Icecast deliver the audio.',
+			},
+			{
+				title: 'Keeping it current',
+				text: 'Celery workers and Redis support background jobs that poll stream data every minute, recording listener counts and stream status. A metadata bridge brings in song and show information from broadcast equipment; the website refreshes scores every 30 seconds while visible.',
+			},
+			{
+				title: 'A voice for the community',
+				text: 'The shared backend also powers weekly audience polls for the News Now sites. Reusable WordPress embeds connect voting and results to centrally managed polls, with reporting tools for staff.',
+			},
+		],
+	},
+	{
 		name: 'Sabine Community Connection',
 		category: 'Community website',
 		url: 'https://sabinecommunityconnection.com',
