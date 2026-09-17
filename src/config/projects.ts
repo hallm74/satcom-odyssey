@@ -25,6 +25,16 @@ export const projects = [
 		],
 	},
 	{
+		name: 'SatCom Meeting Notes',
+		category: 'AI meeting assistant',
+		url: 'https://satcom-meetingminutes.netlify.app',
+		image: '/assets/images/projects/meeting-notes.png',
+		imageAlt: 'Meeting Notes by SatCom — Good conversations. Clear minutes. Next steps.',
+		description: 'Upload a recording for transcription or start with a pasted transcript, then generate draft minutes, decisions, and action items. This working demo lets you review and edit the results, track next steps, and download notes to share.',
+		features: ['Audio transcription & draft minutes', 'Decisions & action-item tracking', 'Editable notes & Markdown downloads'],
+		accent: '#dce9df',
+	},
+	{
 		name: 'Sabine Community Connection',
 		category: 'Community website',
 		url: 'https://sabinecommunityconnection.com',

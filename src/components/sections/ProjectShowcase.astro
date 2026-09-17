@@ -8,7 +8,7 @@ const { detailed = false } = Astro.props;
 	{projects.map((project) => (
 		<article class:list={['project-card', { 'project-featured': project.featured }]}>
 			<div class="project-preview" style={`--project-accent: ${project.accent}`}>
-				<img src={project.image} alt={`${project.name} website preview`} width="1200" height={project.featured ? 1018 : 675} loading="lazy" />
+				<img src={project.image} alt={project.imageAlt || `${project.name} website preview`} width="1200" height={project.featured ? 1018 : 675} loading="lazy" />
 			</div>
 			<div class="project-content">
 				<p class="project-category">{project.category}</p>
