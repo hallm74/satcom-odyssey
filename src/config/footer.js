@@ -74,6 +74,7 @@ export const footerLists = [
 	{
 		title: 'Company',
 		items: [
+			{ title: 'Customer Reviews', slug: '/customer-reviews/' },
 			{
 				title: 'Special Projects',
 				slug: '/projects',

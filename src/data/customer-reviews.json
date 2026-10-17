@@ -1,0 +1,51 @@
+{
+  "observedAt": "2026-10-17T16:20:59.421675Z",
+  "mode": "verified-api-export-snapshot",
+  "reviews": [
+    {
+      "source": "csat",
+      "id": 46611097,
+      "date": "2026-04-27T00:58:40.038783Z",
+      "comment": "Marion and Sean are a great team! They were able to resolve my issue quickly and professionally. We use them for our business and personal computer needs, and highly recommend SatCom to others.",
+      "contact": "Judge Amy McCartney",
+      "company": "42nd Judicial District",
+      "hasMarketingPermission": true
+    },
+    {
+      "source": "nps",
+      "id": 527248,
+      "date": "2026-05-14T13:14:08.700506Z",
+      "comment": "Satcom & Computers provides excellent customer service, prompt responses and resolutions to technical issues.  Staff friendliness is also a plus!",
+      "contact": "Natalie Hurd",
+      "company": "Hurd Electric",
+      "hasMarketingPermission": true
+    },
+    {
+      "source": "nps",
+      "id": 527283,
+      "date": "2026-05-14T19:25:42.031280Z",
+      "comment": "SatCom is reliable, responds quickly, and makes sure all issues are resolved",
+      "contact": "Lisa Butler",
+      "company": "Sabine Parish Humane Society",
+      "hasMarketingPermission": true
+    },
+    {
+      "source": "nps",
+      "id": 527320,
+      "date": "2026-05-15T02:22:29.550215Z",
+      "comment": "Outstanding service. Very professional and dependable",
+      "contact": "Ginger Rice",
+      "company": "Toledo Car Wash",
+      "hasMarketingPermission": true
+    },
+    {
+      "source": "nps",
+      "id": 552929,
+      "date": "2026-10-14T23:04:50.556379Z",
+      "comment": "very attentive, resourceful and capable, and helps immediately!",
+      "contact": "Lori Wheat",
+      "company": "Wheat Physical Therapy & Wellness",
+      "hasMarketingPermission": true
+    }
+  ]
+}

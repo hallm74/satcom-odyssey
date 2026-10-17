@@ -1,0 +1,79 @@
+---
+import Layout from '../layouts/Page.astro';
+import {Container, SmileBackWidget} from '@components/odyssey-theme';
+import snapshot from '../data/customer-reviews.json';
+
+const reviews=snapshot.reviews.filter(review=>review.hasMarketingPermission===true && review.comment.trim());
+const featured=reviews.find(review=>review.source==='csat' && review.id===46611097);
+const others=reviews.filter(review=>review!==featured);
+const checked=new Intl.DateTimeFormat('en-US',{year:'numeric',month:'long',day:'numeric',timeZone:'UTC'}).format(new Date(snapshot.observedAt));
+const seo={
+  title:'Customer Reviews | SatCom & Computers',
+  description:'Read what customers say about SatCom & Computers: helpful people, quick responses and dependable IT support.',
+  image:'/assets/images/customer-reviews/judge-amy-og.jpg',
+  imageAlt:'SatCom customer review from Judge Amy McCartney, 42nd Judicial District: Marion and Sean are a great team.',
+  imageWidth:1200,imageHeight:630,
+};
+---
+
+<Layout seo={seo}>
+  <Container>
+    <section class="review-intro" aria-labelledby="reviews-title">
+      <p class="eyebrow">Customer reviews</p>
+      <h1 id="reviews-title">Customer service<br />is our top priority.</h1>
+      <p class="intro-copy">A few words from the people we help—with their business and personal computer needs.</p>
+      <a class="contact-link" href="/company/contact/">Talk with the SatCom team <span aria-hidden="true">↗</span></a>
+    </section>
+    <section class="selected-reviews" aria-labelledby="selected-heading">
+      <h2 id="selected-heading" class="section-heading">What our customers say</h2>
+      {featured && <figure class="featured-review">
+        <span class="quotation-mark" aria-hidden="true">“</span>
+        <blockquote><p>{featured.comment}</p></blockquote>
+        <figcaption><strong>{featured.contact}</strong><span>{featured.company}</span></figcaption>
+      </figure>}
+      <div class="review-grid">
+        {others.map(review=><figure class="review-card">
+          <blockquote><p>{review.comment}</p></blockquote>
+          <figcaption><strong>{review.contact}</strong><span>{review.company}</span></figcaption>
+        </figure>)}
+      </div>
+      <p class="permission-note">Selected comments with marketing permission recorded in SmileBack. Last checked {checked}.</p>
+    </section>
+    <section class="more-feedback" aria-labelledby="more-heading">
+      <h2 id="more-heading">More customer feedback</h2>
+      <p>Explore more feedback in our SmileBack review feed.</p>
+      <SmileBackWidget backgroundColor="#f2f2f2" />
+      <noscript><p>The SmileBack feed needs JavaScript. The selected reviews above remain available without it.</p></noscript>
+    </section>
+    <aside class="review-cta" aria-label="Contact SatCom">
+      <div><h2>How can we help?</h2><p>Speak with our team about your computer and IT needs.</p></div>
+      <a href="tel:+13182561213">318-256-1213</a>
+    </aside>
+  </Container>
+</Layout>
+
+<style>
+  .review-intro{padding:clamp(3rem,7vw,7rem) 0 3.5rem;max-width:60rem}
+  .eyebrow{font-weight:700;letter-spacing:.13em;text-transform:uppercase;font-size:.85rem;margin-bottom:1rem}
+  h1{font-size:clamp(2.6rem,5.5vw,5.6rem);line-height:1.08;letter-spacing:-.045em;margin:0 0 1.5rem}
+  .intro-copy{font-size:clamp(1.1rem,2vw,1.4rem);max-width:39rem;line-height:1.6}
+  .contact-link{display:inline-block;margin-top:1rem;font-weight:700;text-underline-offset:.3em}
+  .section-heading{font-size:1rem;text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.5rem}
+  figure{margin:0}blockquote{margin:0}blockquote p{margin:0}
+  .featured-review{position:relative;padding:clamp(1.6rem,4.5vw,4.5rem);border-radius:var(--theme-shape-radius);background:var(--theme-surface-2);color:var(--theme-on-surface-2)}
+  .quotation-mark{display:block;font-family:Georgia,serif;font-size:6rem;line-height:.8;margin-bottom:.7rem}
+  .featured-review blockquote{font-size:clamp(1.45rem,2.5vw,2.35rem);line-height:1.5;max-width:62rem}
+  figcaption{display:flex;flex-direction:column;gap:.3rem;line-height:1.5;margin-top:1.8rem;font-size:1rem}
+  figcaption strong{font-weight:700}figcaption span{opacity:.85}
+  .review-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1.2rem;margin-top:1.2rem}
+  .review-card{display:flex;flex-direction:column;justify-content:space-between;padding:clamp(1.5rem,3vw,3rem);background:var(--theme-surface-1);border-radius:var(--theme-shape-radius);color:var(--theme-on-surface-1);min-width:0}
+  .review-card blockquote{font-size:clamp(1.15rem,1.6vw,1.4rem);line-height:1.65}
+  .permission-note{font-size:.9rem;line-height:1.6;margin-top:1.5rem;max-width:50rem}
+  .more-feedback{padding-top:4.5rem}.more-feedback h2,.review-cta h2{font-size:clamp(1.6rem,3vw,2.5rem);margin-bottom:.8rem}
+  .more-feedback>p{line-height:1.6}
+  .review-cta{display:flex;align-items:center;justify-content:space-between;gap:2rem;border-top:1px solid currentColor;margin:4rem 0;padding:2rem 0}
+  .review-cta>a{font-size:1.5rem;font-weight:700;white-space:nowrap;text-underline-offset:.3em}
+  .review-cta p{line-height:1.6;margin-bottom:0}
+  @media(max-width:640px){.review-grid{grid-template-columns:1fr}.review-cta{align-items:flex-start;flex-direction:column}.review-intro{padding-bottom:2.5rem}.more-feedback{padding-top:3rem}}
+  @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto}}
+</style>

@@ -16,6 +16,10 @@ export const nav = [
 		slug: '/company/about',
 	},
 	{
+		title: 'Customer Reviews',
+		slug: '/customer-reviews/',
+	},
+	{
 		title: 'Contact',
 		slug: '/company/contact',
 	},
